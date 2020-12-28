@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Navbar from "./navbar";
 import VisualizationHandler from "./visualizationHandler";
 import { bubbleSort } from "./algorithms/bubbleSort";
+import { selectionSort } from "./algorithms/selectionSort";
 import "./css/style.css";
 
 class Main extends Component {
@@ -31,7 +32,8 @@ class Main extends Component {
 
 	sort() {
 		console.log("sort");
-		const sortingSteps = bubbleSort([...this.state.array]);
+		// const sortingSteps = bubbleSort([...this.state.array]);
+		const sortingSteps = selectionSort([...this.state.array]);
 		this.setState({ sortingSteps });
 	}
 

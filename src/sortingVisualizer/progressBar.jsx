@@ -2,9 +2,9 @@ import React from "react";
 
 const ProgressBar = ({ progress }) => {
 	return (
-		<div class="progress" style={{ height: `${10}px` }}>
+		<div className="progress" style={{ height: `${6}px` }}>
 			<div
-				class="progress-bar"
+				className="progress-bar"
 				role="progressbar"
 				style={{ width: `${progress}%`, background: "gray" }}
 				aria-valuenow="25"

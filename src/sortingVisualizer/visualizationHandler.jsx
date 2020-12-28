@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import VisualizeSortingStep from "./visualizeSortingStep";
+import SelectionSortVisualizer from "./selectionSortVisualizer";
 import VisualizationController from "./visualizationController";
 import ProgressBar from "./progressBar";
 
@@ -152,7 +153,12 @@ class VisualizationHandler extends Component {
 				<div className="container-fluid mt-2 mb-2">
 					<div className="card bg-dark text-white">
 						<div className="card-body">
-							<VisualizeSortingStep
+							{/* <VisualizeSortingStep
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+							/> */}
+							<SelectionSortVisualizer
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
