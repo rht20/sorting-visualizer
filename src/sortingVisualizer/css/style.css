@@ -1,0 +1,16 @@
+.card-body {
+	text-align: center;
+}
+
+.array-bar {
+	position: relative;
+	background: gray;
+	display: inline-block;
+}
+
+.bar-text {
+	position: absolute;
+	text-align: center;
+	width: 100%;
+	bottom: 2px;
+}
