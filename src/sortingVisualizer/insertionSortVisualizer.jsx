@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 import { getHeight, getWidth, getRightMargin } from "./cssPropertyHandler";
 
-class SelectionSortVisualizer extends Component {
+class InsertionSortVisualizer extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
 
@@ -96,13 +96,13 @@ class SelectionSortVisualizer extends Component {
 	getBackgroundColor(index) {
 		const { currentSortingStep } = this.props;
 
-		if (
+		if ("keyIndex" in currentSortingStep && index === currentSortingStep.keyIndex) {
+			return "#f88379";
+		} else if (
 			"sortedIndices" in currentSortingStep &&
 			currentSortingStep.sortedIndices.includes(index)
 		) {
 			return "#A1C084";
-		} else if ("minIndex" in currentSortingStep && index === currentSortingStep.minIndex) {
-			return "#f88379";
 		} else if (
 			("comparison" in currentSortingStep && currentSortingStep.comparison.includes(index)) ||
 			("swap" in currentSortingStep && currentSortingStep.swap.includes(index))
@@ -138,4 +138,4 @@ class SelectionSortVisualizer extends Component {
 	}
 }
 
-export default SelectionSortVisualizer;
+export default InsertionSortVisualizer;

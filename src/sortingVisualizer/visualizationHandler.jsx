@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import VisualizeSortingStep from "./visualizeSortingStep";
 import SelectionSortVisualizer from "./selectionSortVisualizer";
+import InsertionSortVisualizer from "./insertionSortVisualizer";
 import VisualizationController from "./visualizationController";
 import ProgressBar from "./progressBar";
 
@@ -158,7 +159,12 @@ class VisualizationHandler extends Component {
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
-							<SelectionSortVisualizer
+							{/* <SelectionSortVisualizer
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+							/> */}
+							<InsertionSortVisualizer
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}

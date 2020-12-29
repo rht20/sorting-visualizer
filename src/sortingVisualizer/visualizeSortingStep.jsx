@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import $ from "jquery";
 import { getHeight, getWidth, getRightMargin } from "./cssPropertyHandler";
 
-class SelectionSortVisualizer extends Component {
+class VisualizeSortingStep extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
 
@@ -140,4 +140,4 @@ class SelectionSortVisualizer extends Component {
 	}
 }
 
-export default SelectionSortVisualizer;
+export default VisualizeSortingStep;
