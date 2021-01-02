@@ -4,6 +4,7 @@ import VisualizationHandler from "./visualizationHandler";
 import { bubbleSort } from "./algorithms/bubbleSort";
 import { selectionSort } from "./algorithms/selectionSort";
 import { insertionSort } from "./algorithms/insertionSort";
+import { countingSort } from "./algorithms/countingSort";
 import "./css/style.css";
 
 class Main extends Component {
@@ -25,8 +26,9 @@ class Main extends Component {
 	resetArray() {
 		console.log("Main - resetArray");
 		const array = [];
+		const max = 20;
 		for (let i = 0; i < 10; i++) {
-			array.push(Math.floor(Math.random() * 99 + 1));
+			array.push(Math.floor(Math.random() * max + 1));
 		}
 		this.setState({ array }, this.sort);
 	}
@@ -35,7 +37,9 @@ class Main extends Component {
 		console.log("sort");
 		// const sortingSteps = bubbleSort([...this.state.array]);
 		// const sortingSteps = selectionSort([...this.state.array]);
-		const sortingSteps = insertionSort([...this.state.array]);
+		// const sortingSteps = insertionSort([...this.state.array]);
+		const sortingSteps = countingSort([...this.state.array]);
+		// console.log(sortingSteps);
 		this.setState({ sortingSteps });
 	}
 

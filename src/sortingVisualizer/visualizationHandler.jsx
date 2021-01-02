@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import VisualizeSortingStep from "./visualizeSortingStep";
 import SelectionSortVisualizer from "./selectionSortVisualizer";
 import InsertionSortVisualizer from "./insertionSortVisualizer";
+import CountingSortVisualizer from "./countingSortVisualizer";
 import VisualizationController from "./visualizationController";
 import ProgressBar from "./progressBar";
 
@@ -32,6 +33,12 @@ class VisualizationHandler extends Component {
 
 	changeState = (array, sortingStepIndex, currentSortingStep) => {
 		this.setState({ array, sortingStepIndex, currentSortingStep });
+	};
+
+	addTimeoutIdToState = (timeoutId) => {
+		const timeoutIds = [...this.state.timeoutIds];
+		timeoutIds.push(timeoutId);
+		this.setState({ timeoutIds });
 	};
 
 	clearTimeoutIds = () => {
@@ -164,10 +171,16 @@ class VisualizationHandler extends Component {
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
-							<InsertionSortVisualizer
+							{/* <InsertionSortVisualizer
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
+							/> */}
+							<CountingSortVisualizer
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+								addTimeoutIdToState={this.addTimeoutIdToState}
 							/>
 							<ProgressBar progress={this.getProgress()} />
 							<VisualizationController
