@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import BubbleSortVisualizationController from "./bubbleSortVisualizationController";
 import SelectionSortVisualizationController from "./selectionSortVisualizationController";
+<<<<<<< HEAD
 import InsertionSortVisualizer from "./insertionSortVisualizer";
 import CountingSortVisualizationController from "./countingSortVisualizationController";
+=======
+import InsertionSortVisualizationController from "./insertionSortVisualizationController";
+import CountingSortVisualizer from "./countingSortVisualizer";
+>>>>>>> e0118b0... Fixed insertion sort visualization
 import MergeSortVisualizationController from "./mergeSortVisualizationController";
 import VisualizationController from "./visualizationController";
 import ProgressBar from "./progressBar";
@@ -167,16 +172,16 @@ class VisualizationHandler extends Component {
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
-							<SelectionSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-							/>
-							{/* <InsertionSortVisualizer
+							{/* <SelectionSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
+							<InsertionSortVisualizationController
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+							/>
 							{/* <CountingSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}

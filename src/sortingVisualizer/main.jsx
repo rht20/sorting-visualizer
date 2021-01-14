@@ -39,8 +39,8 @@ class Main extends Component {
 	sort() {
 		console.log("sort");
 		// const sortingSteps = bubbleSort([...this.state.array]);
-		const sortingSteps = selectionSort([...this.state.array]);
-		// const sortingSteps = insertionSort([...this.state.array]);
+		// const sortingSteps = selectionSort([...this.state.array]);
+		const sortingSteps = insertionSort([...this.state.array]);
 		// const sortingSteps = countingSort([...this.state.array]);
 		// const sortingSteps = mergeSortCaller([...this.state.array]);
 		console.log(sortingSteps);
