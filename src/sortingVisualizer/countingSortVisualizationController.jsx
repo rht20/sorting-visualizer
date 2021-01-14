@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { getHeight, getWidth, getMarginRight } from "./cssPropertyHandler";
+import {
+	getDivHeight,
+	getHeight,
+	getWidth,
+	getMarginRight,
+	getMarginTop,
+} from "./cssPropertyHandler";
 
-class CountingSortVisualizer extends Component {
+class CountingSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
 
@@ -28,16 +34,17 @@ class CountingSortVisualizer extends Component {
 	}
 
 	adjustCurrentStep(array, currentSortingStep) {
-		const maxValue = this.getMaxValue();
-
 		for (let i = 0; i < array.length; i++) {
 			const id = this.getArrayBarId(i);
 			$(id).css({
-				height: getHeight(array[i]),
-				background: this.getBackgroundColorOfArrayBar(i),
-				marginTop: `${maxValue - array[i]}px`,
+				height: getHeight(array[i], true),
+				background: this.getBackgroundColorOfArrayBar(array, i, currentSortingStep),
+				marginTop: `${getMarginTop(array[i], true)}px`,
 			});
-			$(id).children("div").eq(0).text(this.getArrayBarValue(i));
+			$(id)
+				.children("div")
+				.eq(0)
+				.text(array[i] ? array[i] : "");
 		}
 
 		if ("counts" in currentSortingStep) {
@@ -80,9 +87,9 @@ class CountingSortVisualizer extends Component {
 	visibleArrayBar(index, value) {
 		const id = this.getArrayBarId(index);
 		$(id).css({
-			background: "#A1C084",
-			height: `${getHeight(value)}px`,
-			marginTop: `${this.getMaxValue() - value}px`,
+			background: "gray",
+			height: `${getHeight(value, true)}px`,
+			marginTop: `${getMarginTop(value, true)}px`,
 		});
 		$(id).children("div").eq(0).text(value);
 	}
@@ -95,7 +102,6 @@ class CountingSortVisualizer extends Component {
 		const posOfJ = $(idJ).position();
 
 		const { counts } = this.props.currentSortingStep;
-
 		const { playbackSpeed } = this.props;
 
 		$("#temp" + indexI).animate(
@@ -109,15 +115,13 @@ class CountingSortVisualizer extends Component {
 
 		setTimeout(() => {
 			this.removeTemporaryArrayBar(indexI);
-		}, playbackSpeed);
-		const timeoutId = setTimeout(() => {
+
 			$(idJ).css({ background: "#6caccf" });
 			$(this.getCountsArrayCountBarId(indexJ))
 				.children("div")
 				.eq(0)
 				.text(counts[indexJ] + 1);
 		}, playbackSpeed);
-		this.props.addTimeoutIdToState(timeoutId);
 	}
 
 	addPlaceAtSortedArrayAnimation(indexI, indexJ, array) {
@@ -145,36 +149,13 @@ class CountingSortVisualizer extends Component {
 
 		setTimeout(() => {
 			this.removeTemporaryArrayBar(indexI);
-		}, playbackSpeed);
-		const timeoutId = setTimeout(() => {
+
 			this.visibleArrayBar(indexJ, indexI);
 			$(this.getCountsArrayCountBarId(indexI))
 				.children("div")
 				.eq(0)
 				.text(counts[indexI] - 1);
 		}, playbackSpeed);
-		this.props.addTimeoutIdToState(timeoutId);
-	}
-
-	getMaxValue() {
-		const { array, currentSortingStep } = this.props;
-		let maxValue = Math.max(...array);
-
-		if ("counts" in currentSortingStep) {
-			const { counts } = currentSortingStep;
-			return Math.max(maxValue, counts.length - 1);
-		}
-		return maxValue;
-	}
-
-	getArrayBarValue(index) {
-		const { array, currentSortingStep } = this.props;
-		if ("currentIndex" in currentSortingStep) {
-			return index < currentSortingStep.currentIndex ? "" : array[index];
-		} else if ("sortedIndices" in currentSortingStep) {
-			return currentSortingStep.sortedIndices.includes(index) ? array[index] : "";
-		}
-		return array[index];
 	}
 
 	getArrayBarId(index) {
@@ -189,56 +170,51 @@ class CountingSortVisualizer extends Component {
 		return "#countsArrayCountBar" + index;
 	}
 
-	getBackgroundColorOfArrayBar(index) {
-		const { currentSortingStep } = this.props;
-
-		if ("currentIndex" in currentSortingStep && index < currentSortingStep.currentIndex) {
+	getBackgroundColorOfArrayBar(array, index, currentSortingStep) {
+		if (array[index] === 0) {
 			return "none";
-		} else if ("sortedIndices" in currentSortingStep) {
-			return currentSortingStep.sortedIndices.includes(index) ? "#A1C084" : "none";
 		} else if (
 			("storeCount" in currentSortingStep && currentSortingStep.storeCount[0] === index) ||
 			("placeAtSortedArray" in currentSortingStep &&
 				currentSortingStep.placeAtSortedArray[1] === index)
 		) {
 			return "#6caccf";
-		} else {
-			return "gray";
+		} else if ("sortedIndices" in currentSortingStep) {
+			return currentSortingStep.sortedIndices.includes(index) ? "#A1C084" : "none";
 		}
+		return "gray";
 	}
 
 	render() {
 		const { array, currentSortingStep } = this.props;
-		let counts = [];
-		if ("counts" in currentSortingStep) {
-			counts = currentSortingStep.counts;
-		}
+		const counts = "counts" in currentSortingStep ? currentSortingStep.counts : [];
 
 		const widthOfArrayBar = getWidth(array);
 		const widthOfCountsArrayBar = getWidth(counts);
 
-		const maxValue = this.getMaxValue();
-
 		return (
 			<>
-				<div style={{ position: "relative" }}>
+				<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
 					{array.map((value, index) => (
 						<div
 							key={index}
 							id={"arrayBar" + index}
 							className="array-bar"
 							style={{
-								height: `${getHeight(value)}px`,
+								height: `${getHeight(value, true)}px`,
 								width: `${widthOfArrayBar}%`,
-								background: this.getBackgroundColorOfArrayBar(index),
+								background: this.getBackgroundColorOfArrayBar(
+									array,
+									index,
+									currentSortingStep
+								),
 								marginRight: `${getMarginRight(array, index)}%`,
-								marginTop: `${maxValue - value}px`,
+								marginTop: `${getMarginTop(value, true)}px`,
+								marginBottom: `${20}px`,
 							}}>
-							<div className="bar-text">{this.getArrayBarValue(index)}</div>
+							<div className="bar-text">{value ? value : ""}</div>
 						</div>
 					))}
-
-					<div style={{ paddingBottom: counts.length ? 20 : 0 }}></div>
 
 					{counts.map((value, index) => (
 						<div
@@ -246,10 +222,11 @@ class CountingSortVisualizer extends Component {
 							id={"countsArrayBar" + index}
 							className="array-bar"
 							style={{
-								height: `${getHeight(index)}px`,
+								height: `${getHeight(index, true)}px`,
 								width: `${widthOfCountsArrayBar}%`,
 								background: value ? "#6caccf" : "gray",
 								marginRight: `${getMarginRight(counts, index)}%`,
+								marginTop: `${getMarginTop(index, true)}px`,
 							}}>
 							<div className="bar-text">{index}</div>
 						</div>
@@ -264,7 +241,7 @@ class CountingSortVisualizer extends Component {
 								height: `${20}px`,
 								width: `${widthOfCountsArrayBar}%`,
 								background: "none",
-								marginRight: `${getRightMargin(counts, index)}%`,
+								marginRight: `${getMarginRight(counts, index)}%`,
 							}}>
 							<div className="bar-text">{value}</div>
 						</div>
@@ -275,4 +252,4 @@ class CountingSortVisualizer extends Component {
 	}
 }
 
-export default CountingSortVisualizer;
+export default CountingSortVisualizationController;

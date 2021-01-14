@@ -27,11 +27,11 @@ class Main extends Component {
 	resetArray() {
 		console.log("Main - resetArray");
 		const array = [];
-		const max = 99;
+		const max = 20;
 		for (let i = 0; i < 10; i++) {
 			array.push(Math.floor(Math.random() * max + 1));
 		}
-		array[0] = 99;
+		array[0] = 20;
 		array[1] = 1;
 		this.setState({ array }, this.sort);
 	}
@@ -41,8 +41,8 @@ class Main extends Component {
 		// const sortingSteps = bubbleSort([...this.state.array]);
 		// const sortingSteps = selectionSort([...this.state.array]);
 		// const sortingSteps = insertionSort([...this.state.array]);
-		// const sortingSteps = countingSort([...this.state.array]);
-		const sortingSteps = mergeSortCaller([...this.state.array]);
+		const sortingSteps = countingSort([...this.state.array]);
+		// const sortingSteps = mergeSortCaller([...this.state.array]);
 		console.log(sortingSteps);
 		this.setState({ sortingSteps });
 	}

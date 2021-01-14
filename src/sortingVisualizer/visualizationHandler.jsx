@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import VisualizeSortingStep from "./visualizeSortingStep";
 import SelectionSortVisualizer from "./selectionSortVisualizer";
 import InsertionSortVisualizer from "./insertionSortVisualizer";
-import CountingSortVisualizer from "./countingSortVisualizer";
+import CountingSortVisualizationController from "./countingSortVisualizationController";
 import MergeSortVisualizationController from "./mergeSortVisualizationController";
 import VisualizationController from "./visualizationController";
 import ProgressBar from "./progressBar";
@@ -177,18 +177,18 @@ class VisualizationHandler extends Component {
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
-							{/* <CountingSortVisualizer
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-								addTimeoutIdToState={this.addTimeoutIdToState}
-							/> */}
-							<MergeSortVisualizationController
+							<CountingSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 								addTimeoutIdToState={this.addTimeoutIdToState}
 							/>
+							{/* <MergeSortVisualizationController
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+								addTimeoutIdToState={this.addTimeoutIdToState}
+							/> */}
 							<ProgressBar progress={this.getProgress()} />
 							<VisualizationController
 								play={this.play}

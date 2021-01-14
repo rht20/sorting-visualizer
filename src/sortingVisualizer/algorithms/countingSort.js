@@ -1,6 +1,5 @@
 export function countingSort(array) {
 	const sortingSteps = [];
-	const sortedIndices = [];
 
 	const maxValue = Math.max(...array);
 	const counts = new Array(maxValue + 1).fill(0);
@@ -12,11 +11,12 @@ export function countingSort(array) {
 		sortingSteps.push({
 			array: [...array],
 			counts: [...counts],
-			currentIndex: i,
 			storeCount: [i, array[i]],
 		});
 		counts[array[i]]++;
+		array[i] = 0;
 	}
+	sortingSteps.push({ array: [...array], counts: [...counts] });
 
 	const sortedArray = new Array(array.length).fill(0);
 	for (let i = 0, j = 0; i <= maxValue; i++) {
@@ -25,19 +25,23 @@ export function countingSort(array) {
 				array: [...sortedArray],
 				counts: [...counts],
 				placeAtSortedArray: [i, j],
-				sortedIndices: [...sortedIndices],
 			});
 
-			sortedArray[j] = i;
+			sortedArray[j++] = i;
 			counts[i]--;
-			sortedIndices.push(j++);
+
+			if (counts[i]) {
+				sortingSteps.push({ array: [...sortedArray], counts: [...counts] });
+			}
 		}
 	}
+	sortingSteps.push({ array: [...sortedArray], counts: [...counts] });
 
-	sortingSteps.push({
-		array: [...sortedArray],
-		sortedIndices: [...sortedIndices],
-	});
+	const sortedIndices = [];
+	for (let i = 0; i < array.length; i++) {
+		sortedIndices.push(i);
+	}
+	sortingSteps.push({ array: [...sortedArray], sortedIndices: [...sortedIndices] });
 
 	return sortingSteps;
 }

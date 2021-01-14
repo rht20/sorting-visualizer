@@ -10,7 +10,10 @@ export function getDivHeight() {
 	return 500;
 }
 
-export function getMarginTop(value) {
+export function getMarginTop(value, isCountingSort) {
+	if (isCountingSort) {
+		return 200 - 8 * value - getOffset();
+	}
 	return 230 - 2 * value - getOffset();
 }
 
@@ -18,7 +21,10 @@ export function getMarginRight(array, index) {
 	return !isUndefined(array) && index === array.length - 1 ? 0 : 0.5;
 }
 
-export function getHeight(value) {
+export function getHeight(value, isCountingSort) {
+	if (isCountingSort === true) {
+		return 8 * value + getOffset();
+	}
 	return 2 * value + getOffset();
 }
 
