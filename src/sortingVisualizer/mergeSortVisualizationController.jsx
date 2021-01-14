@@ -189,7 +189,7 @@ class MergeSortVisualizationController extends Component {
 
 	render() {
 		const { array, currentSortingStep } = this.props;
-		let auxiliaryArray =
+		const auxiliaryArray =
 			"auxiliaryArray" in currentSortingStep ? currentSortingStep.auxiliaryArray : [];
 
 		const widthOfArrayBar = getWidth(array);
