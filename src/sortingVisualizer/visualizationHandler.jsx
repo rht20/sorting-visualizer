@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import BubbleSortVisualizationController from "./bubbleSortVisualizationController";
-import SelectionSortVisualizer from "./selectionSortVisualizer";
+import SelectionSortVisualizationController from "./selectionSortVisualizationController";
 import InsertionSortVisualizer from "./insertionSortVisualizer";
 import CountingSortVisualizationController from "./countingSortVisualizationController";
 import MergeSortVisualizationController from "./mergeSortVisualizationController";
@@ -162,16 +162,16 @@ class VisualizationHandler extends Component {
 				<div className="container-fluid mt-2 mb-2">
 					<div className="card bg-dark text-white">
 						<div className="card-body">
-							<BubbleSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-							/>
-							{/* <SelectionSortVisualizer
+							{/* <BubbleSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
+							<SelectionSortVisualizationController
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+							/>
 							{/* <InsertionSortVisualizer
 								array={array}
 								currentSortingStep={currentSortingStep}

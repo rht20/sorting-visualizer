@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { getHeight, getWidth, getMarginRight } from "./cssPropertyHandler";
+import {
+	getDivHeight,
+	getHeight,
+	getWidth,
+	getMarginRight,
+	getMarginTop,
+} from "./cssPropertyHandler";
 
-class SelectionSortVisualizer extends Component {
+class SelectionSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
 
@@ -118,7 +124,7 @@ class SelectionSortVisualizer extends Component {
 		const width = getWidth(array);
 
 		return (
-			<div style={{ position: "relative" }}>
+			<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
 				{array.map((value, index) => (
 					<div
 						key={index}
@@ -129,6 +135,7 @@ class SelectionSortVisualizer extends Component {
 							width: `${width}%`,
 							background: this.getBackgroundColor(index),
 							marginRight: `${getMarginRight(array, index)}%`,
+							marginTop: `${getMarginTop(value)}px`,
 						}}>
 						<div className="bar-text">{value}</div>
 					</div>
@@ -138,4 +145,4 @@ class SelectionSortVisualizer extends Component {
 	}
 }
 
-export default SelectionSortVisualizer;
+export default SelectionSortVisualizationController;
