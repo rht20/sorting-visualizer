@@ -109,6 +109,13 @@ function merge(array, start, end, mid, auxiliaryArray, sortingSteps) {
 		array[j++] = 0;
 	}
 
+	sortingSteps.push({
+		array: [...array],
+		start: start,
+		end: end,
+		auxiliaryArray: [...auxiliaryArray],
+	});
+
 	for (k = start; k <= end; k++) {
 		sortingSteps.push({
 			array: [...array],

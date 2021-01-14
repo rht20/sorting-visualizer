@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { getHeight, getWidth, getRightMargin } from "./cssPropertyHandler";
+import {
+	getDivHeight,
+	getHeight,
+	getWidth,
+	getMarginRight,
+	getMarginTop,
+} from "./cssPropertyHandler";
 
-class MergeSortVisualizer extends Component {
+class MergeSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
-		console.log(currentSortingStep);
 
 		if (currentSortingStep === prevProps.currentSortingStep) {
 			return;
@@ -38,9 +43,12 @@ class MergeSortVisualizer extends Component {
 			$(id).css({
 				height: getHeight(array[i]),
 				background: this.getBackgroundColorOfArrayBar(i),
-				marginTop: `${this.getMarginTop(array[i])}px`,
+				marginTop: `${getMarginTop(array[i])}px`,
 			});
-			$(id).children("div").eq(0).text(this.getArrayBarValue(i));
+			$(id)
+				.children("div")
+				.eq(0)
+				.text(array[i] ? array[i] : "");
 		}
 
 		if ("auxiliaryArray" in currentSortingStep) {
@@ -89,7 +97,7 @@ class MergeSortVisualizer extends Component {
 		$(id).css({
 			background: "gray",
 			height: `${getHeight(value)}px`,
-			marginTop: `${this.getMarginTop(value)}px`,
+			marginTop: `${getMarginTop(value)}px`,
 		});
 		$(id).children("div").eq(0).text(value);
 	}
@@ -140,17 +148,15 @@ class MergeSortVisualizer extends Component {
 		}, playbackSpeed);
 	}
 
-	getArrayBarValue(index) {
-		const { array, currentSortingStep } = this.props;
-
+	getTextFontColor(index, currentSortingStep) {
 		if (
 			"start" in currentSortingStep &&
 			"end" in currentSortingStep &&
 			(index < currentSortingStep.start || index > currentSortingStep.end)
 		) {
-			return "";
+			return "gray";
 		}
-		return array[index] ? array[index] : "";
+		return "white";
 	}
 
 	getArrayBarId(index) {
@@ -176,13 +182,9 @@ class MergeSortVisualizer extends Component {
 			"end" in currentSortingStep &&
 			(index < currentSortingStep.start || index > currentSortingStep.end)
 		) {
-			return "#343c44";
+			return "#454545";
 		}
 		return array[index] ? "gray" : "none";
-	}
-
-	getMarginTop(value) {
-		return 150 - value;
 	}
 
 	render() {
@@ -194,7 +196,7 @@ class MergeSortVisualizer extends Component {
 
 		return (
 			<>
-				<div style={{ position: "relative", height: `${500}px` }}>
+				<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
 					{array.map((value, index) => (
 						<div
 							key={index}
@@ -204,14 +206,19 @@ class MergeSortVisualizer extends Component {
 								height: `${getHeight(value)}px`,
 								width: `${widthOfArrayBar}%`,
 								background: this.getBackgroundColorOfArrayBar(index),
-								marginRight: `${getRightMargin(array, index)}%`,
-								marginTop: `${this.getMarginTop(value)}px`,
+								marginRight: `${getMarginRight(array, index)}%`,
+								marginTop: `${getMarginTop(value)}px`,
+								marginBottom: `${10}px`,
 							}}>
-							<div className="bar-text">{this.getArrayBarValue(index)}</div>
+							<div
+								className="bar-text"
+								style={{
+									color: this.getTextFontColor(index, currentSortingStep),
+								}}>
+								{value ? value : ""}
+							</div>
 						</div>
 					))}
-
-					<div style={{ marginTop: `${25}px`, marginBottom: `${25}px` }}></div>
 
 					{auxiliaryArray.map((value, index) => (
 						<div
@@ -222,8 +229,8 @@ class MergeSortVisualizer extends Component {
 								height: `${value ? getHeight(value) : 0}px`,
 								width: `${widthOfArrayBar}%`,
 								background: "gray",
-								marginRight: `${getRightMargin(array, index)}%`,
-								marginTop: `${this.getMarginTop(value)}px`,
+								marginRight: `${getMarginRight(array, index)}%`,
+								marginTop: `${getMarginTop(value)}px`,
 							}}>
 							<div className="bar-text">{value ? value : ""}</div>
 						</div>
@@ -234,4 +241,4 @@ class MergeSortVisualizer extends Component {
 	}
 }
 
-export default MergeSortVisualizer;
+export default MergeSortVisualizationController;

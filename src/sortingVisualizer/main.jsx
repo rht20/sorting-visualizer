@@ -28,9 +28,11 @@ class Main extends Component {
 		console.log("Main - resetArray");
 		const array = [];
 		const max = 99;
-		for (let i = 0; i < 5; i++) {
+		for (let i = 0; i < 10; i++) {
 			array.push(Math.floor(Math.random() * max + 1));
 		}
+		array[0] = 99;
+		array[1] = 1;
 		this.setState({ array }, this.sort);
 	}
 

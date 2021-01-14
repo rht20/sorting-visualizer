@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { getHeight, getWidth, getRightMargin } from "./cssPropertyHandler";
+import { getHeight, getWidth, getMarginRight } from "./cssPropertyHandler";
 
 class CountingSortVisualizer extends Component {
 	componentDidUpdate(prevProps) {
@@ -231,7 +231,7 @@ class CountingSortVisualizer extends Component {
 								height: `${getHeight(value)}px`,
 								width: `${widthOfArrayBar}%`,
 								background: this.getBackgroundColorOfArrayBar(index),
-								marginRight: `${getRightMargin(array, index)}%`,
+								marginRight: `${getMarginRight(array, index)}%`,
 								marginTop: `${maxValue - value}px`,
 							}}>
 							<div className="bar-text">{this.getArrayBarValue(index)}</div>
@@ -249,7 +249,7 @@ class CountingSortVisualizer extends Component {
 								height: `${getHeight(index)}px`,
 								width: `${widthOfCountsArrayBar}%`,
 								background: value ? "#6caccf" : "gray",
-								marginRight: `${getRightMargin(counts, index)}%`,
+								marginRight: `${getMarginRight(counts, index)}%`,
 							}}>
 							<div className="bar-text">{index}</div>
 						</div>

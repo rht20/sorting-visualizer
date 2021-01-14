@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { getHeight, getWidth, getRightMargin } from "./cssPropertyHandler";
+import { getHeight, getWidth, getMarginRight } from "./cssPropertyHandler";
 
 class VisualizeSortingStep extends Component {
 	componentDidUpdate(prevProps) {
@@ -130,7 +130,7 @@ class VisualizeSortingStep extends Component {
 							height: `${getHeight(value)}px`,
 							width: `${width}%`,
 							background: this.getBackgroundColor(index),
-							marginRight: `${getRightMargin(array, index)}%`,
+							marginRight: `${getMarginRight(array, index)}%`,
 						}}>
 						<div className="bar-text">{value}</div>
 					</div>
