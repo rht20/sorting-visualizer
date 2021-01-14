@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import $ from "jquery";
-import { getHeight, getWidth, getMarginRight } from "./cssPropertyHandler";
+import {
+	getDivHeight,
+	getHeight,
+	getWidth,
+	getMarginRight,
+	getMarginTop,
+} from "./cssPropertyHandler";
 
-class VisualizeSortingStep extends Component {
+class BubbleSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
 
@@ -120,7 +126,7 @@ class VisualizeSortingStep extends Component {
 		const width = getWidth(array);
 
 		return (
-			<div style={{ position: "relative" }}>
+			<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
 				{array.map((value, index) => (
 					<div
 						key={index}
@@ -131,6 +137,7 @@ class VisualizeSortingStep extends Component {
 							width: `${width}%`,
 							background: this.getBackgroundColor(index),
 							marginRight: `${getMarginRight(array, index)}%`,
+							marginTop: `${getMarginTop()}px`,
 						}}>
 						<div className="bar-text">{value}</div>
 					</div>
@@ -140,4 +147,4 @@ class VisualizeSortingStep extends Component {
 	}
 }
 
-export default VisualizeSortingStep;
+export default BubbleSortVisualizationController;
