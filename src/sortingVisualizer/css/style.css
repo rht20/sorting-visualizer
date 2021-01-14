@@ -8,6 +8,14 @@
 	display: inline-block;
 }
 
+.start-bar {
+	position: absolute;
+	width: 5%;
+	background: "#f88379";
+	bottom: 0px;
+	left: 0%;
+}
+
 .bar-text {
 	position: absolute;
 	text-align: center;

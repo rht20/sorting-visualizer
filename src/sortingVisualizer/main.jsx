@@ -5,6 +5,7 @@ import { bubbleSort } from "./algorithms/bubbleSort";
 import { selectionSort } from "./algorithms/selectionSort";
 import { insertionSort } from "./algorithms/insertionSort";
 import { countingSort } from "./algorithms/countingSort";
+import { mergeSortCaller } from "./algorithms/mergeSort";
 import "./css/style.css";
 
 class Main extends Component {
@@ -26,8 +27,8 @@ class Main extends Component {
 	resetArray() {
 		console.log("Main - resetArray");
 		const array = [];
-		const max = 20;
-		for (let i = 0; i < 10; i++) {
+		const max = 99;
+		for (let i = 0; i < 5; i++) {
 			array.push(Math.floor(Math.random() * max + 1));
 		}
 		this.setState({ array }, this.sort);
@@ -38,8 +39,9 @@ class Main extends Component {
 		// const sortingSteps = bubbleSort([...this.state.array]);
 		// const sortingSteps = selectionSort([...this.state.array]);
 		// const sortingSteps = insertionSort([...this.state.array]);
-		const sortingSteps = countingSort([...this.state.array]);
-		// console.log(sortingSteps);
+		// const sortingSteps = countingSort([...this.state.array]);
+		const sortingSteps = mergeSortCaller([...this.state.array]);
+		console.log(sortingSteps);
 		this.setState({ sortingSteps });
 	}
 

@@ -3,6 +3,7 @@ import VisualizeSortingStep from "./visualizeSortingStep";
 import SelectionSortVisualizer from "./selectionSortVisualizer";
 import InsertionSortVisualizer from "./insertionSortVisualizer";
 import CountingSortVisualizer from "./countingSortVisualizer";
+import MergeSortVisualizer from "./mergeSortVisualizer";
 import VisualizationController from "./visualizationController";
 import ProgressBar from "./progressBar";
 
@@ -176,7 +177,13 @@ class VisualizationHandler extends Component {
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
-							<CountingSortVisualizer
+							{/* <CountingSortVisualizer
+								array={array}
+								currentSortingStep={currentSortingStep}
+								playbackSpeed={this.props.playbackSpeed}
+								addTimeoutIdToState={this.addTimeoutIdToState}
+							/> */}
+							<MergeSortVisualizer
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
