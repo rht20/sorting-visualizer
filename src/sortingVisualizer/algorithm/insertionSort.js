@@ -31,7 +31,6 @@ export function insertionSort(array) {
 	for (let i = 0; i < array.length; i++) {
 		sortedIndices.push(i);
 	}
-
 	sortingSteps.push({
 		array: [...array],
 		sortedIndices: [...sortedIndices],

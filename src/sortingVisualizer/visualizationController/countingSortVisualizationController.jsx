@@ -6,7 +6,7 @@ import {
 	getWidth,
 	getMarginRight,
 	getMarginTop,
-} from "./cssPropertyHandler";
+} from "../helper/cssPropertyHelper";
 
 class CountingSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {

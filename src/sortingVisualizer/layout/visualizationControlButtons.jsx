@@ -5,7 +5,7 @@ import { BsFillSkipBackwardFill, BsFillSkipForwardFill } from "react-icons/bs";
 import { GiPauseButton } from "react-icons/gi";
 import { MdReplay } from "react-icons/md";
 
-class VisualizationController extends Component {
+class VisualizationControlButtons extends Component {
 	togglePlayPauseButton = () => {
 		const { isPlayMode, play, pause } = this.props;
 
@@ -74,4 +74,4 @@ class VisualizationController extends Component {
 	}
 }
 
-export default VisualizationController;
+export default VisualizationControlButtons;

@@ -1,18 +1,13 @@
 import React, { Component } from "react";
 import BubbleSortVisualizationController from "./bubbleSortVisualizationController";
 import SelectionSortVisualizationController from "./selectionSortVisualizationController";
-<<<<<<< HEAD
-import InsertionSortVisualizer from "./insertionSortVisualizer";
-import CountingSortVisualizationController from "./countingSortVisualizationController";
-=======
 import InsertionSortVisualizationController from "./insertionSortVisualizationController";
-import CountingSortVisualizer from "./countingSortVisualizer";
->>>>>>> e0118b0... Fixed insertion sort visualization
+import CountingSortVisualizationController from "./countingSortVisualizationController";
 import MergeSortVisualizationController from "./mergeSortVisualizationController";
-import VisualizationController from "./visualizationController";
-import ProgressBar from "./progressBar";
+import VisualizationControlButtons from "../layout/visualizationControlButtons";
+import ProgressBar from "../layout/progressBar";
 
-class VisualizationHandler extends Component {
+class VisualizationController extends Component {
 	constructor() {
 		super();
 
@@ -177,17 +172,17 @@ class VisualizationHandler extends Component {
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 							/> */}
-							<InsertionSortVisualizationController
+							{/* <InsertionSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
-							/>
-							{/* <CountingSortVisualizationController
+							/> */}
+							<CountingSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}
 								playbackSpeed={this.props.playbackSpeed}
 								addTimeoutIdToState={this.addTimeoutIdToState}
-							/> */}
+							/>
 							{/* <MergeSortVisualizationController
 								array={array}
 								currentSortingStep={currentSortingStep}
@@ -195,7 +190,7 @@ class VisualizationHandler extends Component {
 								addTimeoutIdToState={this.addTimeoutIdToState}
 							/> */}
 							<ProgressBar progress={this.getProgress()} />
-							<VisualizationController
+							<VisualizationControlButtons
 								play={this.play}
 								pause={this.pause}
 								replay={this.replay}
@@ -214,4 +209,4 @@ class VisualizationHandler extends Component {
 	}
 }
 
-export default VisualizationHandler;
+export default VisualizationController;

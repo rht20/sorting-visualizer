@@ -6,7 +6,7 @@ import {
 	getWidth,
 	getMarginRight,
 	getMarginTop,
-} from "./cssPropertyHandler";
+} from "../helper/cssPropertyHelper";
 
 class InsertionSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {

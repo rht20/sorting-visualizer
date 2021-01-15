@@ -6,9 +6,9 @@ import {
 	getWidth,
 	getMarginRight,
 	getMarginTop,
-} from "./cssPropertyHandler";
+} from "../helper/cssPropertyHelper";
 
-class BubbleSortVisualizationController extends Component {
+class SelectionSortVisualizationController extends Component {
 	componentDidUpdate(prevProps) {
 		const { currentSortingStep } = this.props;
 
@@ -21,16 +21,14 @@ class BubbleSortVisualizationController extends Component {
 		this.adjustCurrentStep(array);
 
 		if ("swap" in currentSortingStep) {
-			const indexI = currentSortingStep.swap[0];
-			const indexJ = currentSortingStep.swap[1];
-			this.addAnimation(indexI, indexJ, array);
+			this.addSwapAnimation(currentSortingStep.swap[0], currentSortingStep.swap[1], array);
 		}
 	}
 
 	adjustCurrentStep(array) {
 		for (let i = 0; i < array.length; i++) {
 			const id = this.getArrayBarId(i);
-			$(id).css({ height: getHeight(array[i]) });
+			$(id).css({ height: getHeight(array[i]), background: this.getBackgroundColor(i) });
 			$(id).children().eq(0).text(array[i]);
 		}
 	}
@@ -70,7 +68,7 @@ class BubbleSortVisualizationController extends Component {
 		$(id).children().eq(0).text(value);
 	}
 
-	addAnimation(indexI, indexJ, array) {
+	addSwapAnimation(indexI, indexJ, array) {
 		this.addTemporaryArrayBar(indexI, array);
 		this.addTemporaryArrayBar(indexJ, array);
 
@@ -109,12 +107,12 @@ class BubbleSortVisualizationController extends Component {
 			currentSortingStep.sortedIndices.includes(index)
 		) {
 			return "#A1C084";
+		} else if ("minIndex" in currentSortingStep && index === currentSortingStep.minIndex) {
+			return "#f88379";
 		} else if (
-			"comparison" in currentSortingStep &&
-			currentSortingStep.comparison.includes(index)
+			("comparison" in currentSortingStep && currentSortingStep.comparison.includes(index)) ||
+			("swap" in currentSortingStep && currentSortingStep.swap.includes(index))
 		) {
-			return "#6caccf";
-		} else if ("swap" in currentSortingStep && currentSortingStep.swap.includes(index)) {
 			return "#6caccf";
 		} else {
 			return "gray";
@@ -137,7 +135,7 @@ class BubbleSortVisualizationController extends Component {
 							width: `${width}%`,
 							background: this.getBackgroundColor(index),
 							marginRight: `${getMarginRight(array, index)}%`,
-							marginTop: `${getMarginTop()}px`,
+							marginTop: `${getMarginTop(value)}px`,
 						}}>
 						<div className="bar-text">{value}</div>
 					</div>
@@ -147,4 +145,4 @@ class BubbleSortVisualizationController extends Component {
 	}
 }
 
-export default BubbleSortVisualizationController;
+export default SelectionSortVisualizationController;
