@@ -21,7 +21,7 @@ class VisualizationControlButtons extends Component {
 		const marginRight = 25;
 
 		return (
-			<div style={{ textAlign: "center" }}>
+			<div style={{ textAlign: "center", marginTop: `${10}px` }}>
 				<IconContext.Provider value={{ size: 25 }}>
 					<BsFillSkipBackwardFill onClick={() => this.props.goToBeginning()} />
 				</IconContext.Provider>
