@@ -23,12 +23,8 @@ export function bubbleSort(array) {
 			}
 		}
 		sortedIndices.push(array.length - i - 1);
+		sortingSteps.push({ array: [...array], sortedIndices: [...sortedIndices] });
 	}
-
-	sortingSteps.push({
-		array: [...array],
-		sortedIndices: [...sortedIndices],
-	});
 
 	return sortingSteps;
 }

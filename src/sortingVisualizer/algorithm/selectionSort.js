@@ -33,12 +33,8 @@ export function selectionSort(array) {
 		}
 
 		sortedIndices.push(i);
+		sortingSteps.push({ array: [...array], sortedIndices: [...sortedIndices] });
 	}
-
-	sortingSteps.push({
-		array: [...array],
-		sortedIndices: [...sortedIndices],
-	});
 
 	return sortingSteps;
 }
