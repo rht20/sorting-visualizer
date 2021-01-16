@@ -20,8 +20,11 @@ class VisualizationController extends Component {
 				currentSortingStep: {},
 			});
 		} else if (prevProps.playbackSpeed !== playbackSpeed) {
+			const playMode = this.isPlayMode();
 			this.clearTimeoutIds();
-			this.run();
+			if (playMode) {
+				this.run();
+			}
 		}
 	}
 
