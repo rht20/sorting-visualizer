@@ -11,6 +11,7 @@ import CountingSortVisualizationController from "./visualizationController/count
 import MergeSortVisualizationController from "./visualizationController/mergeSortVisualizationController";
 import VisualizationController from "./visualizationController/visualizationController";
 import Navbar from "./layout/navbar";
+import Footer from "./layout/footer";
 import "./css/style.css";
 
 class Main extends Component {
@@ -184,6 +185,7 @@ class Main extends Component {
 					currentPlaybackSpeedKey={currentPlaybackSpeedKey}
 					changePlaybackSpeed={this.changePlaybackSpeed}
 				/>
+				<Footer />
 			</>
 		);
 	}
