@@ -18,10 +18,16 @@ class VisualizationControlButtons extends Component {
 
 	render() {
 		const { isPlayMode, isReplayMode, replay } = this.props;
+		const {
+			playbackSpeedKeyAndValue,
+			currentPlaybackSpeedKey,
+			changePlaybackSpeed,
+		} = this.props;
+
 		const marginRight = 25;
 
 		return (
-			<div style={{ textAlign: "center", marginTop: `${10}px` }}>
+			<div style={{ textAlign: "center", marginTop: `${15}px` }}>
 				<IconContext.Provider value={{ size: 25 }}>
 					<BsFillSkipBackwardFill onClick={() => this.props.goToBeginning()} />
 				</IconContext.Provider>
@@ -69,6 +75,38 @@ class VisualizationControlButtons extends Component {
 				<IconContext.Provider value={{ size: 25 }}>
 					<BsFillSkipForwardFill onClick={() => this.props.goToEnd()} />
 				</IconContext.Provider>
+
+				<div style={{ marginRight: marginRight, display: "inline-block" }}></div>
+
+				<div className="dropdown" style={{ display: "inline-block" }}>
+					<button
+						className="btn btn-secondary dropdown-toggle bg-dark"
+						type="button"
+						id="dropdownMenuButton"
+						data-toggle="dropdown"
+						aria-haspopup="true"
+						aria-expanded="false">
+						{playbackSpeedKeyAndValue.map((playbackSpeed) =>
+							currentPlaybackSpeedKey === playbackSpeed[0]
+								? "Speed " + playbackSpeed[1] + "x"
+								: ""
+						)}
+					</button>
+					<div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						{playbackSpeedKeyAndValue.map((playbackSpeed) => (
+							<a
+								key={playbackSpeed[0]}
+								onClick={(event) => {
+									event.preventDefault();
+									changePlaybackSpeed(playbackSpeed[0]);
+								}}
+								className="dropdown-item"
+								href="">
+								{playbackSpeed[1] + "x"}
+							</a>
+						))}
+					</div>
+				</div>
 			</div>
 		);
 	}

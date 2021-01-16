@@ -1,6 +1,14 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar = ({
+	sortingAlgorithmsKeyAndName,
+	arraySizeKeyAndValue,
+	changeSortingAlgorithm,
+	changeArraySize,
+	currentSortingAlgorithmKey,
+	currentArraySizeKey,
+	generateRandomArray,
+}) => {
 	return (
 		<nav className="navbar navbar-expand-sm navbar-dark bg-dark">
 			<span className="navbar-brand">Sorting Visualizer</span>
@@ -24,19 +32,64 @@ const Navbar = () => {
 							data-toggle="dropdown"
 							aria-haspopup="true"
 							aria-expanded="false">
-							Sorting Algorithm
+							{sortingAlgorithmsKeyAndName.map((algo) =>
+								currentSortingAlgorithmKey === algo[0] ? algo[1] : ""
+							)}
 						</div>
 						<div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-							<a className="dropdown-item" href="">
-								Action
-							</a>
-							<a className="dropdown-item" href="">
-								Another action
-							</a>
-							<a className="dropdown-item" href="">
-								Something else here
-							</a>
+							{sortingAlgorithmsKeyAndName.map((algo) => (
+								<a
+									key={algo[0]}
+									onClick={(event) => {
+										event.preventDefault();
+										changeSortingAlgorithm(algo[0]);
+									}}
+									className="dropdown-item"
+									href="">
+									{algo[1]}
+								</a>
+							))}
 						</div>
+					</li>
+					<li className="nav-item dropdown">
+						<div
+							className="nav-link dropdown-toggle"
+							id="navbarDropdownMenuLink"
+							role="button"
+							data-toggle="dropdown"
+							aria-haspopup="true"
+							aria-expanded="false">
+							{arraySizeKeyAndValue.map((arraySize) =>
+								currentArraySizeKey === arraySize[0]
+									? "Array Size " + arraySize[1]
+									: ""
+							)}
+						</div>
+						<div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+							{arraySizeKeyAndValue.map((arraySize) => (
+								<a
+									key={arraySize[0]}
+									onClick={(event) => {
+										event.preventDefault();
+										changeArraySize(arraySize[0]);
+									}}
+									className="dropdown-item"
+									href="">
+									{arraySize[1]}
+								</a>
+							))}
+						</div>
+					</li>
+					<li className="nav-item">
+						<a
+							onClick={(event) => {
+								event.preventDefault();
+								generateRandomArray();
+							}}
+							className="nav-link"
+							href="">
+							Generate Random Array
+						</a>
 					</li>
 				</ul>
 			</div>

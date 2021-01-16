@@ -195,48 +195,46 @@ class MergeSortVisualizationController extends Component {
 		const widthOfArrayBar = getWidth(array);
 
 		return (
-			<>
-				<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
-					{array.map((value, index) => (
+			<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
+				{array.map((value, index) => (
+					<div
+						key={index}
+						id={"arrayBar" + index}
+						className="array-bar"
+						style={{
+							height: `${getHeight(value)}px`,
+							width: `${widthOfArrayBar}%`,
+							background: this.getBackgroundColorOfArrayBar(index),
+							marginRight: `${getMarginRight(array, index)}%`,
+							marginTop: `${getMarginTop(value)}px`,
+							marginBottom: `${10}px`,
+						}}>
 						<div
-							key={index}
-							id={"arrayBar" + index}
-							className="array-bar"
+							className="bar-text"
 							style={{
-								height: `${getHeight(value)}px`,
-								width: `${widthOfArrayBar}%`,
-								background: this.getBackgroundColorOfArrayBar(index),
-								marginRight: `${getMarginRight(array, index)}%`,
-								marginTop: `${getMarginTop(value)}px`,
-								marginBottom: `${10}px`,
+								color: this.getTextFontColor(index, currentSortingStep),
 							}}>
-							<div
-								className="bar-text"
-								style={{
-									color: this.getTextFontColor(index, currentSortingStep),
-								}}>
-								{value ? value : ""}
-							</div>
+							{value ? value : ""}
 						</div>
-					))}
+					</div>
+				))}
 
-					{auxiliaryArray.map((value, index) => (
-						<div
-							key={index}
-							id={"auxiliaryArrayBar" + index}
-							className="array-bar"
-							style={{
-								height: `${value ? getHeight(value) : 0}px`,
-								width: `${widthOfArrayBar}%`,
-								background: "gray",
-								marginRight: `${getMarginRight(array, index)}%`,
-								marginTop: `${getMarginTop(value)}px`,
-							}}>
-							<div className="bar-text">{value ? value : ""}</div>
-						</div>
-					))}
-				</div>
-			</>
+				{auxiliaryArray.map((value, index) => (
+					<div
+						key={index}
+						id={"auxiliaryArrayBar" + index}
+						className="array-bar"
+						style={{
+							height: `${value ? getHeight(value) : 0}px`,
+							width: `${widthOfArrayBar}%`,
+							background: "gray",
+							marginRight: `${getMarginRight(array, index)}%`,
+							marginTop: `${getMarginTop(value)}px`,
+						}}>
+						<div className="bar-text">{value ? value : ""}</div>
+					</div>
+				))}
+			</div>
 		);
 	}
 }

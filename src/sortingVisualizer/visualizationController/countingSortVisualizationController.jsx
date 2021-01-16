@@ -193,61 +193,59 @@ class CountingSortVisualizationController extends Component {
 		const widthOfCountsArrayBar = getWidth(counts);
 
 		return (
-			<>
-				<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
-					{array.map((value, index) => (
-						<div
-							key={index}
-							id={"arrayBar" + index}
-							className="array-bar"
-							style={{
-								height: `${getHeight(value, true)}px`,
-								width: `${widthOfArrayBar}%`,
-								background: this.getBackgroundColorOfArrayBar(
-									array,
-									index,
-									currentSortingStep
-								),
-								marginRight: `${getMarginRight(array, index)}%`,
-								marginTop: `${getMarginTop(value, true)}px`,
-								marginBottom: `${20}px`,
-							}}>
-							<div className="bar-text">{value ? value : ""}</div>
-						</div>
-					))}
+			<div style={{ position: "relative", height: `${getDivHeight()}px` }}>
+				{array.map((value, index) => (
+					<div
+						key={index}
+						id={"arrayBar" + index}
+						className="array-bar"
+						style={{
+							height: `${getHeight(value, true)}px`,
+							width: `${widthOfArrayBar}%`,
+							background: this.getBackgroundColorOfArrayBar(
+								array,
+								index,
+								currentSortingStep
+							),
+							marginRight: `${getMarginRight(array, index)}%`,
+							marginTop: `${getMarginTop(value, true)}px`,
+							marginBottom: `${20}px`,
+						}}>
+						<div className="bar-text">{value ? value : ""}</div>
+					</div>
+				))}
 
-					{counts.map((value, index) => (
-						<div
-							key={index}
-							id={"countsArrayBar" + index}
-							className="array-bar"
-							style={{
-								height: `${getHeight(index, true)}px`,
-								width: `${widthOfCountsArrayBar}%`,
-								background: value ? "#6caccf" : "gray",
-								marginRight: `${getMarginRight(counts, index)}%`,
-								marginTop: `${getMarginTop(index, true)}px`,
-							}}>
-							<div className="bar-text">{index}</div>
-						</div>
-					))}
+				{counts.map((value, index) => (
+					<div
+						key={index}
+						id={"countsArrayBar" + index}
+						className="array-bar"
+						style={{
+							height: `${getHeight(index, true)}px`,
+							width: `${widthOfCountsArrayBar}%`,
+							background: value ? "#6caccf" : "gray",
+							marginRight: `${getMarginRight(counts, index)}%`,
+							marginTop: `${getMarginTop(index, true)}px`,
+						}}>
+						<div className="bar-text">{index}</div>
+					</div>
+				))}
 
-					{counts.map((value, index) => (
-						<div
-							key={index}
-							id={"countsArrayCountBar" + index}
-							className="array-bar"
-							style={{
-								height: `${20}px`,
-								width: `${widthOfCountsArrayBar}%`,
-								background: "none",
-								marginRight: `${getMarginRight(counts, index)}%`,
-							}}>
-							<div className="bar-text">{value}</div>
-						</div>
-					))}
-				</div>
-			</>
+				{counts.map((value, index) => (
+					<div
+						key={index}
+						id={"countsArrayCountBar" + index}
+						className="array-bar"
+						style={{
+							height: `${20}px`,
+							width: `${widthOfCountsArrayBar}%`,
+							background: "none",
+							marginRight: `${getMarginRight(counts, index)}%`,
+						}}>
+						<div className="bar-text">{value}</div>
+					</div>
+				))}
+			</div>
 		);
 	}
 }

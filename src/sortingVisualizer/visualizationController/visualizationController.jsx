@@ -1,16 +1,31 @@
 import React, { Component } from "react";
-import BubbleSortVisualizationController from "./bubbleSortVisualizationController";
-import SelectionSortVisualizationController from "./selectionSortVisualizationController";
-import InsertionSortVisualizationController from "./insertionSortVisualizationController";
-import CountingSortVisualizationController from "./countingSortVisualizationController";
-import MergeSortVisualizationController from "./mergeSortVisualizationController";
 import VisualizationControlButtons from "../layout/visualizationControlButtons";
 import ProgressBar from "../layout/progressBar";
 
 class VisualizationController extends Component {
 	constructor() {
 		super();
+		this.initializeState();
+	}
 
+	componentDidUpdate(prevProps) {
+		const { array, sortingSteps, playbackSpeed } = this.props;
+
+		if (prevProps.array !== array || prevProps.sortingSteps !== sortingSteps) {
+			this.clearTimeoutIds();
+			this.setState({
+				array,
+				sortingSteps,
+				sortingStepIndex: sortingSteps.length ? 0 : -1,
+				currentSortingStep: {},
+			});
+		} else if (prevProps.playbackSpeed !== playbackSpeed) {
+			this.clearTimeoutIds();
+			this.run();
+		}
+	}
+
+	initializeState() {
 		this.state = {
 			array: [],
 			sortingSteps: [],
@@ -20,26 +35,8 @@ class VisualizationController extends Component {
 		};
 	}
 
-	componentDidUpdate(prevProps) {
-		const { array, sortingSteps } = this.props;
-
-		if (prevProps.array !== array) {
-			this.setState({ array });
-		}
-		if (prevProps.sortingSteps !== sortingSteps) {
-			this.clearTimeoutIds();
-			this.setState({ sortingSteps, sortingStepIndex: sortingSteps.length ? 0 : -1 });
-		}
-	}
-
 	changeState = (array, sortingStepIndex, currentSortingStep) => {
 		this.setState({ array, sortingStepIndex, currentSortingStep });
-	};
-
-	addTimeoutIdToState = (timeoutId) => {
-		const timeoutIds = [...this.state.timeoutIds];
-		timeoutIds.push(timeoutId);
-		this.setState({ timeoutIds });
 	};
 
 	clearTimeoutIds = () => {
@@ -156,55 +153,40 @@ class VisualizationController extends Component {
 
 	render() {
 		const { array, currentSortingStep } = this.state;
+		const { sortingVisualizationController } = this.props;
+		const {
+			playbackSpeedKeyAndValue,
+			currentPlaybackSpeedKey,
+			changePlaybackSpeed,
+		} = this.props;
 
 		return (
-			<>
-				<div className="container-fluid mt-2 mb-2">
-					<div className="card bg-dark text-white">
-						<div className="card-body">
-							{/* <BubbleSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-							/> */}
-							{/* <SelectionSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-							/> */}
-							{/* <InsertionSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-							/> */}
-							<CountingSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-								addTimeoutIdToState={this.addTimeoutIdToState}
-							/>
-							{/* <MergeSortVisualizationController
-								array={array}
-								currentSortingStep={currentSortingStep}
-								playbackSpeed={this.props.playbackSpeed}
-								addTimeoutIdToState={this.addTimeoutIdToState}
-							/> */}
-							<ProgressBar progress={this.getProgress()} />
-							<VisualizationControlButtons
-								play={this.play}
-								pause={this.pause}
-								replay={this.replay}
-								playForward={this.playForward}
-								playBack={this.playBack}
-								goToBeginning={this.goToBeginning}
-								goToEnd={this.goToEnd}
-								isPlayMode={this.isPlayMode()}
-								isReplayMode={this.isReplayMode()}
-							/>
-						</div>
+			<div className="container-fluid mt-2 mb-2">
+				<div className="card bg-dark text-white">
+					<div className="card-body">
+						{React.cloneElement(sortingVisualizationController, {
+							array: array,
+							currentSortingStep: currentSortingStep,
+							playbackSpeed: this.props.playbackSpeed,
+						})}
+						<ProgressBar progress={this.getProgress()} />
+						<VisualizationControlButtons
+							play={this.play}
+							pause={this.pause}
+							replay={this.replay}
+							playForward={this.playForward}
+							playBack={this.playBack}
+							goToBeginning={this.goToBeginning}
+							goToEnd={this.goToEnd}
+							isPlayMode={this.isPlayMode()}
+							isReplayMode={this.isReplayMode()}
+							playbackSpeedKeyAndValue={playbackSpeedKeyAndValue}
+							currentPlaybackSpeedKey={currentPlaybackSpeedKey}
+							changePlaybackSpeed={changePlaybackSpeed}
+						/>
 					</div>
 				</div>
-			</>
+			</div>
 		);
 	}
 }

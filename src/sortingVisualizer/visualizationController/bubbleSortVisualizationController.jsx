@@ -137,7 +137,7 @@ class BubbleSortVisualizationController extends Component {
 							width: `${width}%`,
 							background: this.getBackgroundColor(index),
 							marginRight: `${getMarginRight(array, index)}%`,
-							marginTop: `${getMarginTop()}px`,
+							marginTop: `${getMarginTop(value)}px`,
 						}}>
 						<div className="bar-text">{value}</div>
 					</div>
