@@ -7,4 +7,6 @@
 * It's a React application for visualizing different sorting algorithms  
 * Implemented Bubble Sort, Selection Sort, Insertion Sort, Counting Sort and Merge Sort  
 
+`
 Check out here: https://rht20.github.io/sorting-visualizer
+`
