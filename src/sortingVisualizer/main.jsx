@@ -1,15 +1,14 @@
 import React, { Component } from "react";
-import { bubbleSort } from "./algorithm/bubbleSort";
-import { selectionSort } from "./algorithm/selectionSort";
-import { insertionSort } from "./algorithm/insertionSort";
-import { countingSort } from "./algorithm/countingSort";
-import { mergeSortCaller } from "./algorithm/mergeSort";
-import BubbleSortVisualizationController from "./visualizationController/bubbleSortVisualizationController";
-import SelectionSortVisualizationController from "./visualizationController/selectionSortVisualizationController";
-import InsertionSortVisualizationController from "./visualizationController/insertionSortVisualizationController";
-import CountingSortVisualizationController from "./visualizationController/countingSortVisualizationController";
-import MergeSortVisualizationController from "./visualizationController/mergeSortVisualizationController";
 import VisualizationController from "./visualizationController/visualizationController";
+import {
+	getSortingAlgorithmsKeyAndName,
+	getSortingAlgorithmsKeyFunctionMapping,
+	getSortingAlgorithmsKeyVisualizationControllerMapping,
+	getArraySizeKeyAndValue,
+	getArraySizeKeyValueMapping,
+	getPlaybackSpeedKeyAndValue,
+	getPlaybackSpeedKeyValueMapping,
+} from "./listAndMapping/listAndMapping";
 import Navbar from "./layout/navbar";
 import Footer from "./layout/footer";
 import "./css/style.css";
@@ -44,7 +43,7 @@ class Main extends Component {
 	};
 
 	resetArray = () => {
-		const arraySizeKeyValueMapping = this.getArraySizeKeyValueMapping();
+		const arraySizeKeyValueMapping = getArraySizeKeyValueMapping();
 		const n = arraySizeKeyValueMapping[this.state.currentArraySizeKey];
 
 		const array = [];
@@ -60,7 +59,7 @@ class Main extends Component {
 	};
 
 	sort() {
-		const sortingAlgorithmsKeyFunctionMapping = this.getSortingAlgorithmsKeyFunctionMapping();
+		const sortingAlgorithmsKeyFunctionMapping = getSortingAlgorithmsKeyFunctionMapping();
 		const sortingFunction =
 			sortingAlgorithmsKeyFunctionMapping[this.state.currentSortingAlgorithmKey];
 
@@ -69,83 +68,8 @@ class Main extends Component {
 		this.setState({ sortingSteps });
 	}
 
-	getSortingAlgorithmsKeyAndName() {
-		const sortingAlgorithmsKeyAndName = [
-			["bubbleSort", "Bubble Sort"],
-			["selectionSort", "Selection Sort"],
-			["insertionSort", "Insertion Sort"],
-			["countingSort", "Counting Sort"],
-			["mergeSort", "Merge Sort"],
-		];
-		return sortingAlgorithmsKeyAndName;
-	}
-
-	getSortingAlgorithmsKeyFunctionMapping() {
-		const sortingAlgorithmsKeyFunctionMapping = {
-			bubbleSort: bubbleSort,
-			selectionSort: selectionSort,
-			insertionSort: insertionSort,
-			countingSort: countingSort,
-			mergeSort: mergeSortCaller,
-		};
-		return sortingAlgorithmsKeyFunctionMapping;
-	}
-
-	getSortingAlgorithmsKeyVisualizationControllerMapping() {
-		const sortingAlgorithmsKeyVisualizationControllerMapping = {
-			bubbleSort: BubbleSortVisualizationController,
-			selectionSort: SelectionSortVisualizationController,
-			insertionSort: InsertionSortVisualizationController,
-			countingSort: CountingSortVisualizationController,
-			mergeSort: MergeSortVisualizationController,
-		};
-		return sortingAlgorithmsKeyVisualizationControllerMapping;
-	}
-
-	getArraySizeKeyAndValue() {
-		const arraySizeKeyAndValue = [
-			["size5", 5],
-			["size10", 10],
-			["size25", 25],
-			["size50", 50],
-		];
-		return arraySizeKeyAndValue;
-	}
-
-	getArraySizeKeyValueMapping() {
-		const arraySizeKeyValueMapping = {
-			size5: 5,
-			size10: 10,
-			size25: 25,
-			size50: 50,
-		};
-		return arraySizeKeyValueMapping;
-	}
-
-	getPlaybackSpeedKeyAndValue() {
-		const playbackSpeedKeyAndValue = [
-			["playbackSpeed025", 0.25],
-			["playbackSpeed05", 0.5],
-			["playbackSpeed1", 1],
-			["playbackSpeed15", 1.5],
-			["playbackSpeed2", 2],
-		];
-		return playbackSpeedKeyAndValue;
-	}
-
-	getPlaybackSpeedKeyValueMapping() {
-		const playbackSpeedKeyValueMapping = {
-			playbackSpeed025: 0.25,
-			playbackSpeed05: 0.5,
-			playbackSpeed1: 1,
-			playbackSpeed15: 1.5,
-			playbackSpeed2: 2,
-		};
-		return playbackSpeedKeyValueMapping;
-	}
-
 	getCurrentPlaybackSpeed() {
-		const playbackSpeedKeyValueMapping = this.getPlaybackSpeedKeyValueMapping();
+		const playbackSpeedKeyValueMapping = getPlaybackSpeedKeyValueMapping();
 		const playbackSpeed =
 			400 * playbackSpeedKeyValueMapping[this.state.currentPlaybackSpeedKey];
 		return playbackSpeed;
@@ -160,15 +84,15 @@ class Main extends Component {
 			currentPlaybackSpeedKey,
 		} = this.state;
 
-		const sortingAlgorithmsKeyVisualizationControllerMapping = this.getSortingAlgorithmsKeyVisualizationControllerMapping();
+		const sortingAlgorithmsKeyVisualizationControllerMapping = getSortingAlgorithmsKeyVisualizationControllerMapping();
 		const SortingVisualizationController =
 			sortingAlgorithmsKeyVisualizationControllerMapping[currentSortingAlgorithmKey];
 
 		return (
 			<>
 				<Navbar
-					sortingAlgorithmsKeyAndName={this.getSortingAlgorithmsKeyAndName()}
-					arraySizeKeyAndValue={this.getArraySizeKeyAndValue()}
+					sortingAlgorithmsKeyAndName={getSortingAlgorithmsKeyAndName()}
+					arraySizeKeyAndValue={getArraySizeKeyAndValue()}
 					changeSortingAlgorithm={this.changeSortingAlgorithm}
 					changeArraySize={this.changeArraySize}
 					currentSortingAlgorithmKey={currentSortingAlgorithmKey}
@@ -181,7 +105,7 @@ class Main extends Component {
 					sortingSteps={sortingSteps}
 					playbackSpeed={this.getCurrentPlaybackSpeed()}
 					sortingVisualizationController={<SortingVisualizationController />}
-					playbackSpeedKeyAndValue={this.getPlaybackSpeedKeyAndValue()}
+					playbackSpeedKeyAndValue={getPlaybackSpeedKeyAndValue()}
 					currentPlaybackSpeedKey={currentPlaybackSpeedKey}
 					changePlaybackSpeed={this.changePlaybackSpeed}
 				/>
